@@ -4,8 +4,14 @@
  * Implement method Sort
  */
 function applyCustomSort() {
-  [].__proto__.sort2 = function(compareFunction) {
-    // write code here
+  const originalSort = [].__proto__.sort;
+
+  [].__proto__.sort2 = function (compareFunction) {
+    if (typeof compareFunction === 'function') {
+      return originalSort.call(this, compareFunction);
+    }
+
+    return originalSort.call(this);
   };
 }
 
